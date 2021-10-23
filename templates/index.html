@@ -16,7 +16,7 @@
       <div class="jumbotron text-center">
         <h1>Mission to Mars</h1>
         <!-- Add a button to activate scraping script -->
-        <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        <p><a class="btn btn-danger btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
       </div>
       <!-- Add section for Mars News -->
       <div class="row" id="mars-news">
@@ -25,7 +25,7 @@
             <div class="media-body">
               <h2>Latest Mars News</h2>
               <h4 class="media-heading">{{ mars.news_title }}</h4>
-              <p>{{ mars.news_paragraph }}</p>
+              <blockquote> <p>{{ mars.news_paragraph }}</p> </blockquote>
             </div>
           </div>
         </div>
@@ -36,17 +36,33 @@
           <h2>Featured Mars Image</h2>
           <img
             src="{{ mars.featured_image }}"
-            class="img-responsive"
+            class="img-responsive img-rounded"
             alt="Responsive image"
           />
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4"{>
           <!-- Mars Facts -->
           <div class="row" id="mars-facts">
             <h4>Mars Facts</h4>
             {{ mars.facts | safe }}
           </div>
         </div>
+      </div>
+      <!-- Add section for Mars Hemisphere Images -->
+      <div class="row" id="mars-hemisphere"> 
+        <h2 class="text-center"> Mars Hemispheres</h2>  
+        {% for hemisphere in mars.hemispheres %}
+        <div class="col-md-6">
+          <img
+            src = "{{ hemisphere.img_url }}"
+            class="img-responsive img-rounded"
+            alt="Responseive image"
+          >
+            <div class="caption">
+              <h4 class="text-center"> {{ hemisphere.title}}</h4>
+            </div>
+        </div>
+        {% endfor %}
       </div>
     </div>
   </body>
